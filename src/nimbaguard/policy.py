@@ -41,9 +41,9 @@ class ToolRule:
         return any(fnmatch.fnmatch(host, pat.lower()) for pat in self.allowed_domains)
 
     def path_allowed(self, path: str) -> bool:
-        p = str(Path(path).resolve()) if path else path
-        return any(p == str(Path(pre).resolve()) or p.startswith(str(Path(pre).resolve()).rstrip("/") + "/")
-                   for pre in self.allowed_paths)
+        # resolve() supprime les "../" ; is_relative_to gere Windows et Linux.
+        p = Path(path).resolve()
+        return any(p.is_relative_to(Path(pre).resolve()) for pre in self.allowed_paths)
 
 
 @dataclass
