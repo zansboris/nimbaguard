@@ -1,0 +1,24 @@
+# Politique d'exemple : assistant client d'une banque à Conakry.
+# L'agent peut consulter un solde, lire la FAQ et envoyer un SMS au client.
+# Tout autre outil est refusé (default: deny).
+
+agent: assistant-client-banque
+mode: enforce            # "monitor" pour observer sans bloquer
+default: deny
+max_calls_per_minute: 120
+
+tools:
+  consulter_solde:
+    max_calls_per_minute: 30
+
+  lire_faq:
+    allowed_domains: ["faq.ma-banque.gn", "*.ma-banque.gn"]
+    block_pii: [email, phone, card, iban, secret]   # rien de personnel ne sort vers le web
+
+  envoyer_sms:
+    max_calls_per_minute: 5
+    block_pii: [card, iban, secret]                  # jamais de numéro de carte par SMS
+
+  virement:
+    require_approval: true                           # un humain valide chaque virement
+    max_calls_per_minute: 2
