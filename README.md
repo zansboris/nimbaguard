@@ -1,5 +1,7 @@
 # nimbaguard
 
+**Français** · [English](README.en.md)
+
 **Pare-feu comportemental pour agents IA.** Un agent peut avoir la permission d'utiliser un outil et l'utiliser quand même de façon dangereuse : envoyer des données clients vers un site externe, déclencher un virement, s'emballer et faire 500 appels par minute. `nimbaguard` décrit ce que l'agent est *censé* faire, bloque tout le reste avant exécution, et garde une trace infalsifiable de chaque décision.
 
 Conçu à Conakry, pour les banques, les opérateurs et les fintechs d'Afrique de l'Ouest.
